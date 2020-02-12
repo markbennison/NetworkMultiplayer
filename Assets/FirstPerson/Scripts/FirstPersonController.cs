@@ -10,10 +10,12 @@ public class FirstPersonController : MonoBehaviour
     public float jumpDistance = 5f;
     float moveForward, moveSideway, rotateX, rotateY, verticalVelocity;
     CharacterController characterController;
+    Animator characterAnimation;
 
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
+        characterAnimation = gameObject.GetComponent<Animator>();
     }
 
     void Update()
@@ -41,6 +43,24 @@ public class FirstPersonController : MonoBehaviour
             {
                 verticalVelocity = jumpDistance;
             }
+        }
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            characterAnimation.SetBool("Shooting", true);
+        }
+        else
+        {
+            characterAnimation.SetBool("Shooting", false);
+        }
+
+        if(characterController.velocity.x > 0 || characterController.velocity.z > 0 || characterController.velocity.x < 0 || characterController.velocity.z < 0)
+        {
+            characterAnimation.SetFloat("Speed", 1);
+        }
+        else
+        {
+            characterAnimation.SetFloat("Speed", 0);
         }
     }
 
