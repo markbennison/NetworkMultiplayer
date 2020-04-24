@@ -7,7 +7,7 @@ public class FirstPersonController : MonoBehaviour
     public GameObject cam;
     
     float sensitivity = 2f;
-    float jumpDistance = 4f;
+    float jumpDistance = 6f;
 
     const float SPEED_FLATRATE_WALK = 2f;
     const float SPEED_FLATRATE_JOG = 3f;
@@ -92,9 +92,12 @@ public class FirstPersonController : MonoBehaviour
 
         if (characterController.isGrounded)
         {
+            characterAnimation.SetBool("Grounded", true);
             if (Input.GetButtonDown("Jump"))
             {
                 verticalVelocity = jumpDistance;
+                characterAnimation.SetBool("Grounded", false);
+                characterAnimation.SetTrigger("Jump");
             }
         }
 
