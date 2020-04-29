@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: a237ca249af25b34586fbd1ca4686f39
+guid: 8e3caf7c40f84ef4e933d2f2b722065b
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: JoggingStrafeLeft
+    second: Rifle_WalkForwardAnimation
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,18 +35,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: JoggingStrafeLeft
+      name: Rifle_WalkForwardAnimation
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 25
+      lastFrame: 48
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

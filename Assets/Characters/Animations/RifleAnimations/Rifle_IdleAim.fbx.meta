@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: a237ca249af25b34586fbd1ca4686f39
+guid: 4eecf02a2d49b3844a4789540b361b0f
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: JoggingStrafeLeft
+    second: Rifle_IdleAimAnimation
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,18 +35,18 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: JoggingStrafeLeft
+      name: Rifle_IdleAimAnimation
       takeName: mixamo.com
       internalID: 0
       firstFrame: 0
-      lastFrame: 25
+      lastFrame: 93
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
