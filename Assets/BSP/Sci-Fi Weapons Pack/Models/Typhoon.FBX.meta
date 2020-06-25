@@ -1,0 +1,223 @@
+fileFormatVersion: 2
+guid: ff0e9e7d11890af45bc447548adbe902
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Bone1
+    100002: Bone10
+    100004: Bone11
+    100006: Bone12
+    100008: Bone13
+    100010: Bone14
+    100012: Bone15
+    100014: Bone16
+    100016: Bone17
+    100018: Bone18
+    100020: Bone19
+    100022: Bone2
+    100024: Bone20
+    100026: Bone21
+    100028: Bone22
+    100030: Bone23
+    100032: Bone24
+    100034: Bone25
+    100036: Bone26
+    100038: Bone27
+    100040: Bone28
+    100042: Bone29
+    100044: Bone3
+    100046: Bone4
+    100048: Bone5
+    100050: Bone6
+    100052: Bone7
+    100054: Bone8
+    100056: Bone9
+    100058: Bone_1
+    100060: Bone_10
+    100062: Bone_11
+    100064: Bone_12
+    100066: Bone_13
+    100068: Bone_14
+    100070: Bone_15
+    100072: Bone_16
+    100074: Bone_17
+    100076: Bone_18
+    100078: Bone_19
+    100080: Bone_2
+    100082: Bone_20
+    100084: Bone_21
+    100086: Bone_22
+    100088: Bone_23
+    100090: Bone_24
+    100092: Bone_3
+    100094: Bone_4
+    100096: Bone_5
+    100098: Bone_6
+    100100: Bone_7
+    100102: Bone_8
+    100104: Bone_9
+    100106: FIRESPOT
+    100108: gun
+    100110: SMOKE
+    100112: //RootNode
+    100114: Typhoon
+    400000: Bone1
+    400002: Bone10
+    400004: Bone11
+    400006: Bone12
+    400008: Bone13
+    400010: Bone14
+    400012: Bone15
+    400014: Bone16
+    400016: Bone17
+    400018: Bone18
+    400020: Bone19
+    400022: Bone2
+    400024: Bone20
+    400026: Bone21
+    400028: Bone22
+    400030: Bone23
+    400032: Bone24
+    400034: Bone25
+    400036: Bone26
+    400038: Bone27
+    400040: Bone28
+    400042: Bone29
+    400044: Bone3
+    400046: Bone4
+    400048: Bone5
+    400050: Bone6
+    400052: Bone7
+    400054: Bone8
+    400056: Bone9
+    400058: Bone_1
+    400060: Bone_10
+    400062: Bone_11
+    400064: Bone_12
+    400066: Bone_13
+    400068: Bone_14
+    400070: Bone_15
+    400072: Bone_16
+    400074: Bone_17
+    400076: Bone_18
+    400078: Bone_19
+    400080: Bone_2
+    400082: Bone_20
+    400084: Bone_21
+    400086: Bone_22
+    400088: Bone_23
+    400090: Bone_24
+    400092: Bone_3
+    400094: Bone_4
+    400096: Bone_5
+    400098: Bone_6
+    400100: Bone_7
+    400102: Bone_8
+    400104: Bone_9
+    400106: FIRESPOT
+    400108: gun
+    400110: SMOKE
+    400112: Typhoon
+    400114: //RootNode
+    4300000: Typhoon
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Typhoon
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: arms
+    second: {fileID: 2100000, guid: 712af05e6ea36ea4f885652a1d23a02d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: typhoon
+    second: {fileID: 2100000, guid: 6f12fe81a8a67ff499d57bc289226f23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: typhoon_collimator
+    second: {fileID: 2100000, guid: 1a654718b43b35842bcbd66ac292f7a7, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

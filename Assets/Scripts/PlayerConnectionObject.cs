@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.Networking;
 public class PlayerConnectionObject : NetworkBehaviour
 {
-    public GameObject playerUnitPrefab;
+    public GameObject playerFirstPersonPrefab;
+    public GameObject playerThirdPersonPrefab;
 
     public string PlayerName = "Anonymous";
     void Start()
@@ -28,17 +29,17 @@ public class PlayerConnectionObject : NetworkBehaviour
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            CmdSpawnMyUnit();
-        }
+        //if (Input.GetKeyDown(KeyCode.S))
+        //{
+        //    CmdSpawnMyUnit();
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            string playerName = "Player " + Random.Range(1, 100);
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    string playerName = "Player " + Random.Range(1, 100);
 
-            CmdChangePlayerName(playerName);
-        }
+        //    CmdChangePlayerName(playerName);
+        //}
 
     }
 
@@ -48,7 +49,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     void CmdSpawnMyUnit()
     {
         // Create instance on local machine
-        GameObject go = Instantiate(playerUnitPrefab);
+        GameObject go = Instantiate(playerFirstPersonPrefab);
 
         // Spawn instance on server (and to other clients)
         NetworkServer.SpawnWithClientAuthority(go, connectionToClient);

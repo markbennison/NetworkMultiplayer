@@ -1,0 +1,257 @@
+fileFormatVersion: 2
+guid: b682deb4dd030df4e98e6a718aa0594f
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: assault_mode
+    100002: Bone
+    100004: Bone1
+    100006: Bone10
+    100008: Bone11
+    100010: Bone12
+    100012: Bone13
+    100014: Bone14
+    100016: Bone15
+    100018: Bone16
+    100020: Bone17
+    100022: Bone18
+    100024: Bone19
+    100026: Bone2
+    100028: Bone20
+    100030: Bone21
+    100032: Bone22
+    100034: Bone23
+    100036: Bone24
+    100038: Bone25
+    100040: Bone26
+    100042: Bone27
+    100044: Bone28
+    100046: Bone29
+    100048: Bone3
+    100050: Bone30
+    100052: Bone4
+    100054: Bone5
+    100056: Bone6
+    100058: Bone7
+    100060: Bone8
+    100062: Bone9
+    100064: Bone_1
+    100066: Bone_10
+    100068: Bone_11
+    100070: Bone_12
+    100072: Bone_13
+    100074: Bone_14
+    100076: Bone_15
+    100078: Bone_16
+    100080: Bone_17
+    100082: Bone_18
+    100084: Bone_19
+    100086: Bone_2
+    100088: Bone_20
+    100090: Bone_21
+    100092: Bone_22
+    100094: Bone_23
+    100096: Bone_24
+    100098: Bone_3
+    100100: Bone_4
+    100102: Bone_5
+    100104: Bone_6
+    100106: Bone_7
+    100108: Bone_8
+    100110: Bone_9
+    100112: display
+    100114: empty
+    100116: FIRESPOT
+    100118: firing
+    100120: //RootNode
+    100122: Flux M200 Ravager_LOD1
+    100124: gun
+    100126: magazine
+    100128: reloading
+    100130: shotgun_mode
+    100132: SMOKE
+    100134: Flux M200 Ravager
+    100136: SMDImport
+    400000: assault_mode
+    400002: Bone
+    400004: Bone1
+    400006: Bone10
+    400008: Bone11
+    400010: Bone12
+    400012: Bone13
+    400014: Bone14
+    400016: Bone15
+    400018: Bone16
+    400020: Bone17
+    400022: Bone18
+    400024: Bone19
+    400026: Bone2
+    400028: Bone20
+    400030: Bone21
+    400032: Bone22
+    400034: Bone23
+    400036: Bone24
+    400038: Bone25
+    400040: Bone26
+    400042: Bone27
+    400044: Bone28
+    400046: Bone29
+    400048: Bone3
+    400050: Bone30
+    400052: Bone4
+    400054: Bone5
+    400056: Bone6
+    400058: Bone7
+    400060: Bone8
+    400062: Bone9
+    400064: Bone_1
+    400066: Bone_10
+    400068: Bone_11
+    400070: Bone_12
+    400072: Bone_13
+    400074: Bone_14
+    400076: Bone_15
+    400078: Bone_16
+    400080: Bone_17
+    400082: Bone_18
+    400084: Bone_19
+    400086: Bone_2
+    400088: Bone_20
+    400090: Bone_21
+    400092: Bone_22
+    400094: Bone_23
+    400096: Bone_24
+    400098: Bone_3
+    400100: Bone_4
+    400102: Bone_5
+    400104: Bone_6
+    400106: Bone_7
+    400108: Bone_8
+    400110: Bone_9
+    400112: display
+    400114: empty
+    400116: FIRESPOT
+    400118: firing
+    400120: //RootNode
+    400122: Flux M200 Ravager_LOD1
+    400124: gun
+    400126: magazine
+    400128: reloading
+    400130: shotgun_mode
+    400132: SMOKE
+    400134: Flux M200 Ravager
+    400136: SMDImport
+    4300000: magazine
+    4300002: Flux M200 Ravager_LOD1
+    4300004: Flux M200 Ravager
+    4300006: SMDImport
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Flux M200 Ravager_LOD1
+    13700002: magazine
+    13700004: Flux M200 Ravager
+    13700006: SMDImport
+    2186277476908879412: ImportLogs
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: arms
+    second: {fileID: 2100000, guid: 02b73063171c5be49ae59bad12f9d9f1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: flux_m200 ravager
+    second: {fileID: 2100000, guid: 0eb564ab2f47dcb48bbfca4ea3ffa87b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gun
+    second: {fileID: 2100000, guid: ff98290f4c2636a46b31361da06cd686, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hands
+    second: {fileID: 2100000, guid: 712af05e6ea36ea4f885652a1d23a02d, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 0
+    importBlendShapes: 1
+    importCameras: 0
+    importLights: 0
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 0
+  importAnimation: 0
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

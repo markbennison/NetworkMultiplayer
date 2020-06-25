@@ -24,7 +24,7 @@ public class FirstPersonController : MonoBehaviour
     void Start()
     {
         characterController = gameObject.GetComponent<CharacterController>();
-        characterAnimation = gameObject.GetComponent<Animator>();
+        characterAnimation = gameObject.GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -166,3 +166,5 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 }
+
+
