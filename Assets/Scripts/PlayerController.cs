@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -35,10 +36,25 @@ public class PlayerController : NetworkBehaviour
 
 
         characterController = gameObject.GetComponent<CharacterController>();
-        characterAnimation = gameObject.GetComponentInChildren<Animator>();
+        //        characterAnimation = gameObject.GetComponentInChildren<Animator>();
+        Animator[] characterAnimations;
+        characterAnimations = gameObject.GetComponentsInChildren<Animator>();
+        foreach (Animator anim in characterAnimations)
+        {
+            if (anim.gameObject.name == "QuasarGun")
+            {
+                characterAnimation = anim;
+            }
+        }
+
+        //characterAnimation = gameObject.GetComponentInChildren<Animator>();
         characterAnimation.SetBool("HasAmmo", true);
     }
 
+    private void Animator()
+    {
+        throw new NotImplementedException();
+    }
 
     void Update()
     {

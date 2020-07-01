@@ -81,4 +81,6 @@ MonoBehaviour:
     type: 3}
   playerThirdPersonPrefab: {fileID: 2894334047511563922, guid: 78dc548871ee47441829c6af7c136ebc,
     type: 3}
+  playerObject: {fileID: 5273255192317839263, guid: 4f5b501b114168e45bf04ccd269a1d4a,
+    type: 3}
   PlayerName: Anonymous

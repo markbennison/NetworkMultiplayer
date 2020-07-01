@@ -6,6 +6,7 @@ public class PlayerConnectionObject : NetworkBehaviour
 {
     public GameObject playerFirstPersonPrefab;
     public GameObject playerThirdPersonPrefab;
+    public GameObject playerObject;
 
     public string PlayerName = "Anonymous";
     void Start()
@@ -49,10 +50,13 @@ public class PlayerConnectionObject : NetworkBehaviour
     void CmdSpawnMyUnit()
     {
         // Create instance on local machine
-        GameObject go = Instantiate(playerFirstPersonPrefab);
+        //GameObject go = Instantiate(playerFirstPersonPrefab);
+        GameObject go = Instantiate(playerObject);
 
         // Spawn instance on server (and to other clients)
         NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
+        //NetworkServer.SpawnWithClientAuthority(temp, connectionToClient);
+
     }
 
     [Command]
@@ -77,6 +81,19 @@ public class PlayerConnectionObject : NetworkBehaviour
         Debug.Log("Player name changed: " + playerName);
         PlayerName = playerName;
     }
+
+    //[ClientRpc]
+    //void RpcRemoveOtherCameras()
+    //{
+    //    if (hasAuthority)
+    //    {
+    //        return;
+    //    }
+
+    //    this.transform.GetChild(0).gameObject.SetActive(false);
+
+    //    Debug.Log("Camera Deleted");
+    //}
 
     /* ********** ********** */
 }
