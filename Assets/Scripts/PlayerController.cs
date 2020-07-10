@@ -171,8 +171,32 @@ public class PlayerController : NetworkBehaviour
         characterController.Move(worldMovement * Time.deltaTime);
 
 
-
-        characterAnimation.SetBool("Walking", true);
+        if (movement.z > 0)
+        {
+            characterAnimation.SetBool("Walking", true);
+            //characterAnimation.SetFloat("Speed", speed);
+        }
+        else if (movement.z < 0)
+        {
+            characterAnimation.SetBool("Walking", true);
+            //characterAnimation.SetFloat("Speed", -speed);
+        }
+        else if (movement.x > 0)
+        {
+            characterAnimation.SetBool("Walking", true);
+            //characterAnimation.SetFloat("Speed", speed);
+        }
+        else if (movement.x < 0)
+        {
+            characterAnimation.SetBool("Walking", true);
+            //characterAnimation.SetFloat("Speed", -speed);
+        }
+        else
+        {
+            characterAnimation.SetBool("Walking", false);
+            //characterAnimation.SetFloat("Speed", 0);
+        }
+        
     }
 
     void FixedUpdate()
