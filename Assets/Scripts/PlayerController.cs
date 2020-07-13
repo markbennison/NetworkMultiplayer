@@ -28,6 +28,10 @@ public class PlayerController : NetworkBehaviour
     float speed = SPEED_FLATRATE_WALK;
     float runEnergy = RUN_ENERGY_LIMIT;
     float moveForward, moveSideway, rotateX, rotateY, verticalVelocity;
+
+    bool shooting = false;
+    float shotCooldown = 0;
+
     CharacterController characterController;
     Animator characterAnimation;
 
@@ -139,11 +143,11 @@ public class PlayerController : NetworkBehaviour
 
         if (characterController.isGrounded)
         {
-            characterAnimation.SetBool("Grounded", true);
+            //characterAnimation.SetBool("Grounded", true);
             if (Input.GetButtonDown("Jump"))
             {
                 verticalVelocity = jumpDistance;
-                characterAnimation.SetBool("Grounded", false);
+                //characterAnimation.SetBool("Grounded", false);
                 characterAnimation.SetTrigger("Jump");
             }
         }
@@ -151,16 +155,24 @@ public class PlayerController : NetworkBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             characterAnimation.SetBool("Shooting", true);
+            shooting = true;
         }
         if (Input.GetButtonUp("Fire1"))
         {
             characterAnimation.SetBool("Shooting", false);
+            shooting = false;
         }
+
+        // Countdown until next bullet can be fired.
+        if (shotCooldown > 0f)
+        {
+            shotCooldown = shotCooldown - Time.deltaTime;
+        }
+
 
 
         Vector3 normalisedMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
         Vector3 movement = normalisedMovement * speed;
-        Debug.Log("movement: " + movement);
 
         //Vector3 movement = new Vector3(moveSideway, verticalVelocity, moveForward);
         transform.Rotate(0, rotateX, 0);
@@ -171,30 +183,13 @@ public class PlayerController : NetworkBehaviour
         characterController.Move(worldMovement * Time.deltaTime);
 
 
-        if (movement.z > 0)
+        if (movement.z > 0 || movement.z < 0 || movement.x > 0 || movement.x < 0)
         {
             characterAnimation.SetBool("Walking", true);
-            //characterAnimation.SetFloat("Speed", speed);
-        }
-        else if (movement.z < 0)
-        {
-            characterAnimation.SetBool("Walking", true);
-            //characterAnimation.SetFloat("Speed", -speed);
-        }
-        else if (movement.x > 0)
-        {
-            characterAnimation.SetBool("Walking", true);
-            //characterAnimation.SetFloat("Speed", speed);
-        }
-        else if (movement.x < 0)
-        {
-            characterAnimation.SetBool("Walking", true);
-            //characterAnimation.SetFloat("Speed", -speed);
         }
         else
         {
             characterAnimation.SetBool("Walking", false);
-            //characterAnimation.SetFloat("Speed", 0);
         }
         
     }
@@ -205,8 +200,25 @@ public class PlayerController : NetworkBehaviour
         {
             verticalVelocity += Physics.gravity.y * Time.deltaTime;
         }
-    }
 
+        if (!hasAuthority)
+        {
+            Debug.Log("no authority - fixed update");
+            return;
+        }
+
+        if (shooting && shotCooldown <= 0f)
+        {
+            shotCooldown = 4f * Time.deltaTime;
+            RaycastHit hitObject;
+
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitObject, 20))
+            {
+                Debug.DrawLine(cam.transform.position, hitObject.point, Color.magenta, 0.5f); ;
+                Debug.Log("TEST: " + hitObject.distance.ToString());
+            }
+        }
+    }
 
     /* ********** SERVER COMMANDS ********** */
 
