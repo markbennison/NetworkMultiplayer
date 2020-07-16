@@ -8,12 +8,22 @@ public class PlayerConnectionObject : NetworkBehaviour
     public GameObject playerThirdPersonPrefab;
     public GameObject playerObject;
 
+    [SerializeField]
+    Behaviour[] componentsToDisable;
+
     public string PlayerName = "Anonymous";
+
     void Start()
     {
         if (!isLocalPlayer)
         {
-            // Another player, do nothing
+            // Another player
+            for (int i = 0; i < componentsToDisable.Length; i++)
+            {
+                componentsToDisable[i].enabled = false;
+            }
+
+
             return;
         }
 

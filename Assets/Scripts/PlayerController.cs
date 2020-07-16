@@ -69,7 +69,6 @@ public class PlayerController : NetworkBehaviour
 
         if (!hasAuthority)
         {
-            Debug.Log("no authority");
             bestGuessPosition = bestGuessPosition + (velocity * Time.deltaTime);
 
             //transform.position = Vector3.Lerp(transform.position, bestGuessPosition, Time.deltaTime * latencySmoothingFactor);
@@ -196,6 +195,7 @@ public class PlayerController : NetworkBehaviour
 
     void FixedUpdate()
     {
+
         if (!characterController.isGrounded)
         {
             verticalVelocity += Physics.gravity.y * Time.deltaTime;
@@ -203,22 +203,39 @@ public class PlayerController : NetworkBehaviour
 
         if (!hasAuthority)
         {
-            Debug.Log("no authority - fixed update");
             return;
         }
+
 
         if (shooting && shotCooldown <= 0f)
         {
             shotCooldown = 4f * Time.deltaTime;
-            RaycastHit hitObject;
+            Shoot();
+        }
 
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitObject, 20))
+    }
+
+    [Client]
+    void Shoot()
+    {
+        
+        RaycastHit hitObject;
+
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitObject, 20))
+        {
+            Debug.DrawLine(cam.transform.position, hitObject.point, Color.magenta, 0.5f); ;
+            Debug.Log("TEST: " + hitObject.distance.ToString());
+
+            float damage = 15 - hitObject.distance;
+            if (damage < 1)
             {
-                Debug.DrawLine(cam.transform.position, hitObject.point, Color.magenta, 0.5f); ;
-                Debug.Log("TEST: " + hitObject.distance.ToString());
+                damage = 1;
             }
+
+            hitObject.collider.SendMessageUpwards("CmdApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
         }
     }
+
 
     /* ********** SERVER COMMANDS ********** */
 
