@@ -23,6 +23,9 @@ public class PlayerSetup : NetworkBehaviour
             {
                 componentsToDisable[i].enabled = false;
             }
+
+            //remove 1PP
+            this.transform.GetChild(0).gameObject.SetActive(false);
         }
         else
         {
@@ -32,6 +35,9 @@ public class PlayerSetup : NetworkBehaviour
             {
                 sceneCamera.gameObject.SetActive(false);
             }
+
+            //remove 3PP
+            this.transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 
