@@ -4,12 +4,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 public class PlayerConnectionObject : NetworkBehaviour
 {
-    public GameObject playerFirstPersonPrefab;
-    public GameObject playerThirdPersonPrefab;
     public GameObject playerObject;
-
-    [SerializeField]
-    Behaviour[] componentsToDisable;
 
     public string PlayerName = "Anonymous";
 
@@ -17,13 +12,7 @@ public class PlayerConnectionObject : NetworkBehaviour
     {
         if (!isLocalPlayer)
         {
-            // Another player
-            for (int i = 0; i < componentsToDisable.Length; i++)
-            {
-                componentsToDisable[i].enabled = false;
-            }
-
-
+            // Another player, do nothing
             return;
         }
 
