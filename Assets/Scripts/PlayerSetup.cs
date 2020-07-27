@@ -32,6 +32,8 @@ public class PlayerSetup : NetworkBehaviour
             //remove 3PP
             this.transform.GetChild(1).gameObject.SetActive(false);
         }
+
+        GetComponent<PlayerManager>().Setup();
     }
 
     public override void OnStartClient()

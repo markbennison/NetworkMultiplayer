@@ -11,14 +11,22 @@ public class PlayerManager : NetworkBehaviour
     [SyncVar]
     public float currentHP;
     private float maxHP = 100;
-    // Start is called before the first frame update
+
+    [SyncVar]
+    private bool isDead = false;
+    public bool IsDead
+    {
+        get { return isDead; }
+        protected set { isDead = value; }
+    }
+
+    [SerializeField]
+    private Behaviour[] disableOnDeath;
+    private bool[] wasEnabled;
+
     void Start()
     {
-        SetDefaults();
-        //if (lifeBarRectTransform != null)
-        //{
-            lifeBarRectTransform = (RectTransform)panelCurrentHP.transform;
-        //}
+        //Setup();
     }
 
     // Update is called once per frame
@@ -30,17 +38,85 @@ public class PlayerManager : NetworkBehaviour
         //} 
     }
 
+    public void Setup()
+    {
+        wasEnabled = new bool[disableOnDeath.Length];
+        for (int i = 0; i < wasEnabled.Length; i++)
+        {
+            wasEnabled[i] = disableOnDeath[i].enabled;
+        }
+
+        SetDefaults();
+        //if (lifeBarRectTransform != null)
+        //{
+        lifeBarRectTransform = (RectTransform)panelCurrentHP.transform;
+        //}
+    }
+
     [ClientRpc]
     public void RpcApplyDamage(float amount)
     {
         currentHP -= amount;
 
         Debug.Log(transform.name + " health: " + currentHP);
+
+        if (currentHP <= 0.0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        isDead = true;
+
+        //disable components
+        for (int i = 0; i < disableOnDeath.Length; i++)
+        {
+            disableOnDeath[i].enabled = false;
+        }
+
+        Collider collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = false;
+        }
+
+        Debug.Log(transform.name + " is dead");
+
+        //call respawn
+        StartCoroutine(Respawn());
+    }
+
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(GameManager.instance.gamesettings.respawnTime);
+
+        SetDefaults();
+
+        Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = spawnPoint.position;
+        transform.rotation = spawnPoint.rotation;
+
     }
 
     public void SetDefaults()
     {
+        isDead = false;
+
         currentHP = maxHP;
+
+        for (int i = 0; i < disableOnDeath.Length; i++)
+        {
+            disableOnDeath[i].enabled = wasEnabled[i];
+        }
+
+        Collider collider = GetComponent<Collider>();
+        if (collider != null)
+        {
+            collider.enabled = true;
+        }
+
     }
 
     //void ApplyDamage(float damage)

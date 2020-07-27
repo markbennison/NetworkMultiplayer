@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 5273255192317839260}
   - component: {fileID: 713914455107638660}
   - component: {fileID: 3513181183614536023}
-  - component: {fileID: 859119057035030417}
   - component: {fileID: 5996106380304173579}
   - component: {fileID: 7883478907089956120}
+  - component: {fileID: 859119057035030417}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Player
@@ -131,19 +131,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
---- !u!114 &859119057035030417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5273255192317839263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8064a695c2498b479ebd1e0dc9260ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 2555385831005453368}
 --- !u!114 &5996106380304173579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +163,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelCurrentHP: {fileID: 2806536451612101303}
   currentHP: 100
-  maxHP: 100
+  disableOnDeath:
+  - {fileID: 859119057035030417}
+--- !u!114 &859119057035030417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5273255192317839263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8064a695c2498b479ebd1e0dc9260ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 2555385831005453368}
 --- !u!1001 &1400109164054224800
 PrefabInstance:
   m_ObjectHideFlags: 0

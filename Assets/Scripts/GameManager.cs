@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    public GameSettings gamesettings;
+
+    private void Awake()
+    {
+        if (instance != null)
+        {
+            Debug.LogError("More than one GameManger in scene.");
+        }
+    }
+
     private const string PREFIX = "Player ";
     private static Dictionary<string, PlayerManager> players = new Dictionary<string, PlayerManager>();
 
