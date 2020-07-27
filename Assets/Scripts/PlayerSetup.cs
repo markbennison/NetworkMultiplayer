@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-
+[RequireComponent(typeof(PlayerManager))]
 public class PlayerSetup : NetworkBehaviour
 {
     [SerializeField]
@@ -18,14 +18,7 @@ public class PlayerSetup : NetworkBehaviour
     {
         if (!isLocalPlayer)
         {
-            // Remote player
-            for (int i = 0; i < componentsToDisable.Length; i++)
-            {
-                componentsToDisable[i].enabled = false;
-            }
-
-            //remove 1PP
-            this.transform.GetChild(0).gameObject.SetActive(false);
+            DisableRemoteComponents();
         }
         else
         {
@@ -41,41 +34,36 @@ public class PlayerSetup : NetworkBehaviour
         }
     }
 
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        string networkID = GetComponent<NetworkIdentity>().netId.ToString() ;
+        PlayerManager player = GetComponent<PlayerManager>();
+
+        GameManager.RegisterPlayer(networkID, player);
+    }
+
+    void DisableRemoteComponents()
+    {
+        // Remote player
+        for (int i = 0; i < componentsToDisable.Length; i++)
+        {
+            componentsToDisable[i].enabled = false;
+        }
+
+        //remove 1PP
+        transform.GetChild(0).gameObject.SetActive(false);
+    }
+
     void OnDisable()
     {
         if (sceneCamera != null)
         {
             sceneCamera.gameObject.SetActive(true);
         }
+
+        GameManager.UnregisterPlayer(transform.name);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //if (!cameraCheck)
-        //{
-        //    RpcRemoveOtherCameras();
-        //    cameraCheck = true;
-        //}
-    }
-
-
-    /* ********** CLIENT COMMANDS ********** */
-
-    [ClientRpc]
-    void RpcRemoveOtherCameras()
-    {
-        if (hasAuthority)
-        {
-            this.transform.GetChild(1).gameObject.SetActive(false);
-            Debug.Log("3PP Deleted");
-            return;
-        }
-
-        this.transform.GetChild(0).gameObject.SetActive(false);
-
-        Debug.Log("Camera Deleted");
-    }
-
-    /* ********** ********** */
 }

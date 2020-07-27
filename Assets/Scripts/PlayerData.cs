@@ -7,7 +7,7 @@ public class PlayerData : NetworkBehaviour
 {
     public float MaxHP;
     public float CurrentHP;
-    public HPManager myHPManager;
+    public PlayerManager player;
 
     // Start is called before the first frame update
     void Start()
@@ -18,7 +18,7 @@ public class PlayerData : NetworkBehaviour
         {
             if (eachChild.name == "Canvas")
             {
-                myHPManager = eachChild.GetComponent<HPManager>();
+                player = eachChild.GetComponent<PlayerManager>();
             }
         }
         //myHPManager = GameObject.FindWithTag("Canvas").GetComponent<HPManager>();
@@ -29,7 +29,7 @@ public class PlayerData : NetworkBehaviour
     {
         if (hasAuthority)
         {
-            myHPManager.currentHP = CurrentHP;
+            player.currentHP = CurrentHP;
         }
     }
 }

@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Networking;
-public class HPManager : NetworkBehaviour
+public class PlayerManager : NetworkBehaviour
 {
     public GameObject panelCurrentHP;
     private RectTransform lifeBarRectTransform;
+
+    [SyncVar]
     public float currentHP;
-    public float maxHP;
+    private float maxHP = 100;
     // Start is called before the first frame update
     void Start()
     {
-        maxHP = 100;
-        currentHP = 100;
+        SetDefaults();
         //if (lifeBarRectTransform != null)
         //{
             lifeBarRectTransform = (RectTransform)panelCurrentHP.transform;
@@ -27,6 +28,19 @@ public class HPManager : NetworkBehaviour
         //{
             lifeBarRectTransform.sizeDelta = new Vector2(currentHP, lifeBarRectTransform.sizeDelta.y);
         //} 
+    }
+
+    [ClientRpc]
+    public void RpcApplyDamage(float amount)
+    {
+        currentHP -= amount;
+
+        Debug.Log(transform.name + " health: " + currentHP);
+    }
+
+    public void SetDefaults()
+    {
+        currentHP = maxHP;
     }
 
     //void ApplyDamage(float damage)
@@ -51,21 +65,18 @@ public class HPManager : NetworkBehaviour
 
     /* ********** SERVER COMMANDS ********** */
 
-    [Command]
-    void CmdApplyDamage(float damage)
-    {
-        Debug.Log("SERVER ACKNOWLEDGES DAMAGE: " + damage);
-        currentHP -= damage;
+    //[Command]
+    //void CmdApplyDamage(float damage)
+    //{
+    //    string playerID = "<player placeholder>";
+    //    Debug.Log("SERVER ACKNOWLEDGES DAMAGE to " + playerID + ": " + damage);
 
-        // Update clients
-        RpcUpdateHealth(currentHP);
+    //    // Update clients
+    //    RpcUpdateHealth(damage);
 
-        if (currentHP <= 0.0)
-        {
-            Invoke("CmdSelfTerminate", 0);
-            //Invoke("RpcSelfTerminate", 0);
-        }
-    }
+
+    //}
+
 
     [Command]
     void CmdSelfTerminate()
@@ -79,9 +90,16 @@ public class HPManager : NetworkBehaviour
     /* ********** CLIENT COMMANDS ********** */
 
     [ClientRpc]
-    void RpcUpdateHealth(float newHP)
+    void RpcUpdateHealth(float damage)
     {
-        currentHP = newHP;
+        Debug.Log("RpcUpdateHealth " + damage);
+        currentHP -= damage;
+
+        if (currentHP <= 0.0)
+        {
+            //Invoke("CmdSelfTerminate", 0);
+            //Invoke("RpcSelfTerminate", 0);
+        }
     }
 
     [ClientRpc]

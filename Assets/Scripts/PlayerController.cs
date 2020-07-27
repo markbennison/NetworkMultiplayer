@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour
 {
+    private const string PLAYER_TAG = "Player";
 
     Vector3 velocity;
     Vector3 bestGuessPosition;
@@ -232,12 +233,31 @@ public class PlayerController : NetworkBehaviour
                 damage = 1;
             }
 
-            hitObject.collider.SendMessageUpwards("CmdApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
+            if (hitObject.collider.tag == PLAYER_TAG)
+            {
+                CmdPlayerHit(hitObject.collider.name, damage);
+            }
+
+            //hitObject.collider.SendMessageUpwards("CmdApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
         }
     }
 
 
     /* ********** SERVER COMMANDS ********** */
+    [Command]
+    void CmdPlayerHit(string playerID, float damage)
+    {
+        Debug.Log("SERVER ACKNOWLEDGES DAMAGE to " + playerID + ": " + damage);
+
+        PlayerManager player = GameManager.GetPlayer(playerID);
+
+
+        player.RpcApplyDamage(damage);
+        // Update clients
+        //RpcUpdateHealth(damage);
+
+
+    }
 
     [Command]
     void CmdUpdateVelocity(Vector3 velocity, Vector3 position)
