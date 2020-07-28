@@ -35,25 +35,37 @@ public class PlayerController : NetworkBehaviour
 
     CharacterController characterController;
     Animator characterAnimation;
+    Animator gunAnimation;
+
+    CharacterStates characterStates;
+    Collider collider;
+    string playerid;
 
     void Start()
     {
-
-
+        characterStates = gameObject.GetComponent<CharacterStates>();
         characterController = gameObject.GetComponent<CharacterController>();
-        //        characterAnimation = gameObject.GetComponentInChildren<Animator>();
-        Animator[] characterAnimations;
-        characterAnimations = gameObject.GetComponentsInChildren<Animator>();
-        foreach (Animator anim in characterAnimations)
+
+        Animator[] animations;
+        animations = gameObject.GetComponentsInChildren<Animator>();
+        foreach (Animator anim in animations)
         {
             if (anim.gameObject.name == "QuasarGun")
+            {
+                gunAnimation = anim;
+            }
+            if (anim.gameObject.name == "xbot")
             {
                 characterAnimation = anim;
             }
         }
 
-        //characterAnimation = gameObject.GetComponentInChildren<Animator>();
-        characterAnimation.SetBool("HasAmmo", true);
+        //characterAnimation = gameObject.GetComponent<Animator>();
+        gunAnimation.SetBool("HasAmmo", true);
+
+
+        collider = GetComponent<Collider>();
+        playerid = collider.name;
     }
 
     private void Animator()
@@ -144,22 +156,25 @@ public class PlayerController : NetworkBehaviour
         if (characterController.isGrounded)
         {
             //characterAnimation.SetBool("Grounded", true);
+            characterStates.CmdSetGrounded(playerid, true);
             if (Input.GetButtonDown("Jump"))
             {
                 verticalVelocity = jumpDistance;
                 //characterAnimation.SetBool("Grounded", false);
-                characterAnimation.SetTrigger("Jump");
+                //characterAnimation.SetTrigger("Jump");
+                characterStates.CmdSetGrounded(playerid, false);
+                characterStates.CmdTriggerJump(playerid);
             }
         }
 
         if (Input.GetButtonDown("Fire1"))
         {
-            characterAnimation.SetBool("Shooting", true);
+            gunAnimation.SetBool("Shooting", true);
             shooting = true;
         }
         if (Input.GetButtonUp("Fire1"))
         {
-            characterAnimation.SetBool("Shooting", false);
+            gunAnimation.SetBool("Shooting", false);
             shooting = false;
         }
 
@@ -183,13 +198,18 @@ public class PlayerController : NetworkBehaviour
         characterController.Move(worldMovement * Time.deltaTime);
 
 
+        //characterAnimation.SetFloat("VelocityX", movement.x);
+        //characterAnimation.SetFloat("VelocityZ", movement.z);
+        characterStates.CmdSetVelocityX(playerid, movement.x);
+        characterStates.CmdSetVelocityZ(playerid, movement.z);
+
         if (movement.z > 0 || movement.z < 0 || movement.x > 0 || movement.x < 0)
         {
-            characterAnimation.SetBool("Walking", true);
+            //characterAnimation.SetBool("Walking", true);
         }
         else
         {
-            characterAnimation.SetBool("Walking", false);
+            //characterAnimation.SetBool("Walking", false);
         }
         
     }
