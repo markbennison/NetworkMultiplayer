@@ -90,7 +90,7 @@ public class PlayerManager : NetworkBehaviour
 
     IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(GameManager.instance.gamesettings.respawnTime);
+        yield return new WaitForSeconds(3f);
 
         SetDefaults();
 

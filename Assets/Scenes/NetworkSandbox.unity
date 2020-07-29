@@ -826,8 +826,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 452d706384fa94e42b0423f5d63b0773, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamesettings:
-    respawnTime: 3
 --- !u!4 &1720473513
 Transform:
   m_ObjectHideFlags: 0
