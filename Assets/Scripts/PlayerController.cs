@@ -90,23 +90,6 @@ public class PlayerController : NetworkBehaviour
             return;
         }
 
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    this.transform.Translate(0, 1, 0);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.D))
-        //{
-        //    Destroy(gameObject);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.W))
-        //{
-        //    velocity = new Vector3(1, 0, 0);
-
-        //    CmdUpdateVelocity(velocity, transform.position);
-        //}
-
         // ***** ************************** ***** //
         // **** DETERMINE SPEED & DIRECTION ***** //
         // ***** ************************** ***** //
@@ -155,13 +138,10 @@ public class PlayerController : NetworkBehaviour
 
         if (characterController.isGrounded)
         {
-            //characterAnimation.SetBool("Grounded", true);
             characterStates.CmdSetGrounded(playerid, true);
             if (Input.GetButtonDown("Jump"))
             {
                 verticalVelocity = jumpDistance;
-                //characterAnimation.SetBool("Grounded", false);
-                //characterAnimation.SetTrigger("Jump");
                 characterStates.CmdSetGrounded(playerid, false);
                 characterStates.CmdTriggerJump(playerid);
             }
@@ -197,21 +177,8 @@ public class PlayerController : NetworkBehaviour
         worldMovement = transform.rotation * worldMovement;
         characterController.Move(worldMovement * Time.deltaTime);
 
-
-        //characterAnimation.SetFloat("VelocityX", movement.x);
-        //characterAnimation.SetFloat("VelocityZ", movement.z);
         characterStates.CmdSetVelocityX(playerid, movement.x);
-        characterStates.CmdSetVelocityZ(playerid, movement.z);
-
-        if (movement.z > 0 || movement.z < 0 || movement.x > 0 || movement.x < 0)
-        {
-            //characterAnimation.SetBool("Walking", true);
-        }
-        else
-        {
-            //characterAnimation.SetBool("Walking", false);
-        }
-        
+        characterStates.CmdSetVelocityZ(playerid, movement.z);       
     }
 
     void FixedUpdate()
@@ -239,7 +206,6 @@ public class PlayerController : NetworkBehaviour
     [Client]
     void Shoot()
     {
-        
         RaycastHit hitObject;
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitObject, 20))
@@ -257,8 +223,6 @@ public class PlayerController : NetworkBehaviour
             {
                 CmdPlayerHit(hitObject.collider.name, damage);
             }
-
-            //hitObject.collider.SendMessageUpwards("CmdApplyDamage", damage, SendMessageOptions.DontRequireReceiver);
         }
     }
 
@@ -271,12 +235,8 @@ public class PlayerController : NetworkBehaviour
 
         PlayerManager player = GameManager.GetPlayer(playerID);
 
-
-        player.RpcApplyDamage(damage);
         // Update clients
-        //RpcUpdateHealth(damage);
-
-
+        player.RpcApplyDamage(damage);
     }
 
     [Command]

@@ -40,6 +40,14 @@ public class CharacterStates : NetworkBehaviour
     }
 
     [Command]
+    public void CmdTriggerDeath(string playerID)
+    {
+        PlayerManager player = GameManager.GetPlayer(playerID);
+        player.gameObject.GetComponent<CharacterStates>().RpcTriggerDeath();
+    }
+
+
+    [Command]
     public void CmdSetGrounded(string playerID, bool value)
     {
         PlayerManager player = GameManager.GetPlayer(playerID);

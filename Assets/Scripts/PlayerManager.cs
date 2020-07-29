@@ -24,18 +24,20 @@ public class PlayerManager : NetworkBehaviour
     private Behaviour[] disableOnDeath;
     private bool[] wasEnabled;
 
+    CharacterStates characterStates;
+    string playerid;
+
     void Start()
     {
-        //Setup();
+        Setup();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (lifeBarRectTransform != null)
-        //{
-            lifeBarRectTransform.sizeDelta = new Vector2(currentHP, lifeBarRectTransform.sizeDelta.y);
-        //} 
+        // Update lifebar based on current health
+        lifeBarRectTransform.sizeDelta = new Vector2(currentHP, lifeBarRectTransform.sizeDelta.y);
     }
 
     public void Setup()
@@ -47,24 +49,15 @@ public class PlayerManager : NetworkBehaviour
         }
 
         SetDefaults();
-        //if (lifeBarRectTransform != null)
-        //{
+
         lifeBarRectTransform = (RectTransform)panelCurrentHP.transform;
-        //}
+
+        characterStates = gameObject.GetComponent<CharacterStates>();
+        Collider collider = GetComponent<Collider>();
+        playerid = collider.name;
     }
 
-    [ClientRpc]
-    public void RpcApplyDamage(float amount)
-    {
-        currentHP -= amount;
 
-        Debug.Log(transform.name + " health: " + currentHP);
-
-        if (currentHP <= 0.0)
-        {
-            Die();
-        }
-    }
 
     private void Die()
     {
@@ -81,6 +74,8 @@ public class PlayerManager : NetworkBehaviour
         {
             collider.enabled = false;
         }
+
+        characterStates.CmdTriggerDeath(playerid);
 
         Debug.Log(transform.name + " is dead");
 
@@ -119,64 +114,23 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
-    //void ApplyDamage(float damage)
-    //{
-    //    if (currentHP <= 0.0)
-    //    {
-    //        return;
-    //    }
+    /* ********** SERVER COMMANDS********** */
 
-    //    currentHP -= damage;
-
-    //    if (currentHP <= 0.0)
-    //    {
-    //        Invoke("SelfTerminate", 0);
-    //    }
-    //}
-
-    //void SelfTerminate()
-    //{
-    //    Destroy(gameObject);
-    //}
-
-    /* ********** SERVER COMMANDS ********** */
-
-    //[Command]
-    //void CmdApplyDamage(float damage)
-    //{
-    //    string playerID = "<player placeholder>";
-    //    Debug.Log("SERVER ACKNOWLEDGES DAMAGE to " + playerID + ": " + damage);
-
-    //    // Update clients
-    //    RpcUpdateHealth(damage);
-
-
-    //}
-
-
-    [Command]
-    void CmdSelfTerminate()
-    {
-        Destroy(gameObject);
-    }
-
-
-    /* ********** ********** */
 
     /* ********** CLIENT COMMANDS ********** */
-
     [ClientRpc]
-    void RpcUpdateHealth(float damage)
+    public void RpcApplyDamage(float amount)
     {
-        Debug.Log("RpcUpdateHealth " + damage);
-        currentHP -= damage;
+        currentHP -= amount;
+
+        Debug.Log(transform.name + " health: " + currentHP);
 
         if (currentHP <= 0.0)
         {
-            //Invoke("CmdSelfTerminate", 0);
-            //Invoke("RpcSelfTerminate", 0);
+            Die();
         }
     }
+
 
     [ClientRpc]
     void RpcSelfTerminate()
