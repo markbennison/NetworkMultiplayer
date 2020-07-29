@@ -8,6 +8,8 @@ public class PlayerManager : NetworkBehaviour
     public GameObject panelCurrentHP;
     private RectTransform lifeBarRectTransform;
 
+    public GameObject deathScreen;
+
     [SyncVar]
     public float currentHP;
     private float maxHP = 100;
@@ -62,6 +64,7 @@ public class PlayerManager : NetworkBehaviour
     private void Die()
     {
         isDead = true;
+        deathScreen.SetActive(true);
 
         //disable components
         for (int i = 0; i < disableOnDeath.Length; i++)
@@ -98,6 +101,7 @@ public class PlayerManager : NetworkBehaviour
     public void SetDefaults()
     {
         isDead = false;
+        deathScreen.SetActive(false);
 
         currentHP = maxHP;
 
