@@ -34,7 +34,6 @@ public class PlayerController : NetworkBehaviour
     float shotCooldown = 0;
 
     CharacterController characterController;
-    Animator characterAnimation;
     Animator gunAnimation;
 
     CharacterStates characterStates;
@@ -54,18 +53,12 @@ public class PlayerController : NetworkBehaviour
             {
                 gunAnimation = anim;
             }
-            if (anim.gameObject.name == "xbot")
-            {
-                characterAnimation = anim;
-            }
         }
-
-        //characterAnimation = gameObject.GetComponent<Animator>();
-        gunAnimation.SetBool("HasAmmo", true);
-
 
         collider = GetComponent<Collider>();
         playerid = collider.name;
+
+        gunAnimation.SetBool("HasAmmo", characterStates.HasAmmo);
     }
 
     private void Animator()
@@ -195,7 +188,7 @@ public class PlayerController : NetworkBehaviour
         }
 
 
-        if (shooting && shotCooldown <= 0f)
+        if (characterStates.HasAmmo && shooting && shotCooldown <= 0f)
         {
             shotCooldown = 4f * Time.deltaTime;
             Shoot();
@@ -206,6 +199,7 @@ public class PlayerController : NetworkBehaviour
     [Client]
     void Shoot()
     {
+        characterStates.CmdDecreaseAmmo(playerid, 1);
         RaycastHit hitObject;
 
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitObject, 20))

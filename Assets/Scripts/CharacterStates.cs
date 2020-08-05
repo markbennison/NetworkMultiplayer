@@ -22,14 +22,36 @@ public class CharacterStates : NetworkBehaviour
     [SyncVar]
     public float velocityZ = 0f;
 
+    [SyncVar]
+    int ammoCount = 0;
 
     bool isShooting = false;
     bool isReloading = false;
     bool isWalking = false;
     bool isRunning = false;
-    bool hasAmmo = false;
+    
     bool melee = false;
 
+    public int AmmoCount {
+        get
+        {
+            return this.ammoCount;
+        }
+    }
+
+    public bool HasAmmo { 
+        get
+        {
+            if (ammoCount > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        } 
+    }
 
     /* ********** SERVER COMMANDS ********** */
     [Command]
@@ -53,6 +75,37 @@ public class CharacterStates : NetworkBehaviour
         PlayerManager player = GameManager.GetPlayer(playerID);
         player.gameObject.GetComponent<CharacterStates>().RpcSetGrounded(value);
     }
+
+
+    [Command]
+    public void CmdSetAmmo(string playerID, int value)
+    {
+        Debug.Log("AMMO SERVER SET: " + value);
+        PlayerManager player = GameManager.GetPlayer(playerID);
+        player.gameObject.GetComponent<CharacterStates>().RpcSetAmmo(value);
+    }
+
+    //[Command]
+    //public int CmdGetAmmo(string playerID)
+    //{
+    //    PlayerManager player = GameManager.GetPlayer(playerID);
+    //    return player.gameObject.GetComponent<CharacterStates>().AmmoCount;
+    //}
+
+    [Command]
+    public void CmdIncreaseAmmo(string playerID, int value)
+    {
+        PlayerManager player = GameManager.GetPlayer(playerID);
+        player.gameObject.GetComponent<CharacterStates>().RpcIncreaseAmmo(value);
+    }
+
+    [Command]
+    public void CmdDecreaseAmmo(string playerID, int value)
+    {
+        PlayerManager player = GameManager.GetPlayer(playerID);
+        player.gameObject.GetComponent<CharacterStates>().RpcDecreaseAmmo(value);
+    }
+
 
     [Command]
     public void CmdSetVelocityX(string playerID, float value)
@@ -91,6 +144,24 @@ public class CharacterStates : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    public void RpcSetAmmo(int value)
+    {
+        Debug.Log("AMMO RPC SET: " + value);
+        ammoCount = value;
+    }
+
+    [ClientRpc]
+    public void RpcIncreaseAmmo(int value)
+    {
+        ammoCount += value;
+    }
+
+    [ClientRpc]
+    public void RpcDecreaseAmmo(int value)
+    {
+        ammoCount -= value;
+    }
 
     [ClientRpc]
     public void RpcHasRifle(bool value)
