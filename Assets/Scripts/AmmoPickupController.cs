@@ -26,7 +26,6 @@ public class AmmoPickupController : NetworkBehaviour
     {
         if (collidedObject.tag == "Player")
         {
-            Debug.Log("PICKUP: " + collidedObject.name);
             CharacterStates characterStates = collidedObject.GetComponent<CharacterStates>();
             characterStates.CmdIncreaseAmmo(collidedObject.name, ammoAmount);
             Destroy(this.gameObject);
