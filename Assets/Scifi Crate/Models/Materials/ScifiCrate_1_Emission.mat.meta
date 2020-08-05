@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: c01ef5b16611ced4fa2b4baa393d898a
+labels:
+- Prop
+- Junk
+- Transport
+- Cargo
+- PhysicalBased
+- PhysicalBasedShading
+- PBS
+- PBR
+- Box
+- Crate
+- Scifi
+- ScienceFiction
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

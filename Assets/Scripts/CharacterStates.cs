@@ -80,7 +80,6 @@ public class CharacterStates : NetworkBehaviour
     [Command]
     public void CmdSetAmmo(string playerID, int value)
     {
-        Debug.Log("AMMO SERVER SET: " + value);
         PlayerManager player = GameManager.GetPlayer(playerID);
         player.gameObject.GetComponent<CharacterStates>().RpcSetAmmo(value);
     }
@@ -147,7 +146,6 @@ public class CharacterStates : NetworkBehaviour
     [ClientRpc]
     public void RpcSetAmmo(int value)
     {
-        Debug.Log("AMMO RPC SET: " + value);
         ammoCount = value;
     }
 
