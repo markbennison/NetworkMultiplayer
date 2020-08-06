@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -34,6 +33,10 @@ public class GameManager : MonoBehaviour
         return players[playerID];
     }
 
+    /* ********** *************** ********** */
+    /* **********  For Debugging  ********** */
+    /* ********** *************** ********** */
+
     //void OnGUI()
     //{
     //    GUILayout.BeginArea(new Rect(200, 200, 200, 500));
@@ -47,5 +50,4 @@ public class GameManager : MonoBehaviour
     //    GUILayout.EndVertical();
     //    GUILayout.EndArea();
     //}
-
 }

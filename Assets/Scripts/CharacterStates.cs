@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 
 public class CharacterStates : NetworkBehaviour
@@ -53,7 +51,18 @@ public class CharacterStates : NetworkBehaviour
         } 
     }
 
+    void Start()
+    {
+        if (characterAnimation != null)
+        {
+            animateCharacter = true;
+        }
+    }
+
+    /* ********** *************** ********** */
     /* ********** SERVER COMMANDS ********** */
+    /* ********** *************** ********** */
+
     [Command]
     public void CmdTriggerJump(string playerID)
     {
@@ -84,13 +93,6 @@ public class CharacterStates : NetworkBehaviour
         player.gameObject.GetComponent<CharacterStates>().RpcSetAmmo(value);
     }
 
-    //[Command]
-    //public int CmdGetAmmo(string playerID)
-    //{
-    //    PlayerManager player = GameManager.GetPlayer(playerID);
-    //    return player.gameObject.GetComponent<CharacterStates>().AmmoCount;
-    //}
-
     [Command]
     public void CmdIncreaseAmmo(string playerID, int value)
     {
@@ -104,7 +106,6 @@ public class CharacterStates : NetworkBehaviour
         PlayerManager player = GameManager.GetPlayer(playerID);
         player.gameObject.GetComponent<CharacterStates>().RpcDecreaseAmmo(value);
     }
-
 
     [Command]
     public void CmdSetVelocityX(string playerID, float value)
@@ -120,9 +121,9 @@ public class CharacterStates : NetworkBehaviour
         player.gameObject.GetComponent<CharacterStates>().RpcSetVelocityZ(value);
     }
 
-
-
-    /* ********** CLIENT COMMANDS ********** */
+    /* ********** *************** ********** */
+    /* ***** SERVER-TO-CLIENT COMMANDS ***** */
+    /* ********** *************** ********** */
 
     [ClientRpc]
     public void RpcTriggerJump()
@@ -169,7 +170,6 @@ public class CharacterStates : NetworkBehaviour
         {
             characterAnimation.SetBool("HasRifle", value);
         }
-
     }
 
     [ClientRpc]
@@ -201,13 +201,4 @@ public class CharacterStates : NetworkBehaviour
         }
 
     }
-
-    void Start()
-    {
-        if(characterAnimation != null)
-        {
-            animateCharacter = true;
-        }
-    }
-
 }

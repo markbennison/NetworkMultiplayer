@@ -1,21 +1,24 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerController : NetworkBehaviour
 {
-    private const string PLAYER_TAG = "Player";
+    public GameObject cam;
+
+    CharacterController characterController;
+    Animator gunAnimation;
+    CharacterStates characterStates;
+    Collider collider;
+    string playerid;
+
+    const string PLAYER_TAG = "Player";
+
+    // Consider accounting for latency in movement
+    //Vector3 bestGuessPosition;
+    //float localLatency; 
 
     Vector3 velocity;
-    Vector3 bestGuessPosition;
-
-    float localLatency; // TODO: Get from PlayerConnectionObject
-
-    float latencySmoothingFactor = 10f;
-
-    public GameObject cam;
 
     float sensitivity = 2f;
     float jumpDistance = 6f;
@@ -28,23 +31,20 @@ public class PlayerController : NetworkBehaviour
     bool haste = false;
     float speed = SPEED_FLATRATE_WALK;
     float runEnergy = RUN_ENERGY_LIMIT;
-    float moveForward, moveSideway, rotateX, rotateY, verticalVelocity;
+    float rotateX, rotateY, verticalVelocity;
 
     bool shooting = false;
     float shotCooldown = 0;
 
-    CharacterController characterController;
-    Animator gunAnimation;
-
-    CharacterStates characterStates;
-    Collider collider;
-    string playerid;
-
     void Start()
     {
+        collider = GetComponent<Collider>();
+        playerid = collider.name;
+
         characterStates = gameObject.GetComponent<CharacterStates>();
         characterController = gameObject.GetComponent<CharacterController>();
 
+        // Find Gun Animation controller in child object
         Animator[] animations;
         animations = gameObject.GetComponentsInChildren<Animator>();
         foreach (Animator anim in animations)
@@ -54,9 +54,6 @@ public class PlayerController : NetworkBehaviour
                 gunAnimation = anim;
             }
         }
-
-        collider = GetComponent<Collider>();
-        playerid = collider.name;
 
         gunAnimation.SetBool("HasAmmo", characterStates.HasAmmo);
     }
@@ -68,35 +65,56 @@ public class PlayerController : NetworkBehaviour
 
     void Update()
     {
-
         // Verify Player has control of object
-
-        //transform.Translate(velocity * Time.deltaTime);
-
         if (!hasAuthority)
         {
-            bestGuessPosition = bestGuessPosition + (velocity * Time.deltaTime);
-
+            // Consider accounting for latency in movement
+            //bestGuessPosition = bestGuessPosition + (velocity * Time.deltaTime);
             //transform.position = Vector3.Lerp(transform.position, bestGuessPosition, Time.deltaTime * latencySmoothingFactor);
 
             // Another player, do nothing else?
             return;
         }
 
-        // ***** ************************** ***** //
-        // **** DETERMINE SPEED & DIRECTION ***** //
-        // ***** ************************** ***** //
+        // Player has authority over this object, continue:
 
-        if (Input.GetButtonDown("Fire3"))
+        // Determine speed and rotation
+        CheckHaste();
+        CalculateSpeed();
+        CalculateLookRotation();
+
+        // Check if initating a jump, and only if grounded
+        CheckJumping();
+
+        // Apply movement based on previous calculations
+        ApplyMovement();
+
+        // Check if shooting and apply cooldown for gun (auto)rechambering
+        CheckShooting();
+        RechamberingGun();
+    }
+
+    void FixedUpdate()
+    {
+        if (!characterController.isGrounded)
         {
-            haste = true;
+            verticalVelocity += Physics.gravity.y * Time.deltaTime;
         }
 
-        if (Input.GetButtonUp("Fire3"))
+        if (!hasAuthority)
         {
-            haste = false;
+            return;
         }
 
+        if (characterStates.HasAmmo && shooting && shotCooldown <= 0f)
+        {
+            shotCooldown = 4f * Time.deltaTime;
+            Shoot();
+        }
+    }
+
+    void CalculateSpeed()
+    {
         // Determine travel speed
         if (runEnergy > 0 && haste)
         {
@@ -116,19 +134,18 @@ public class PlayerController : NetworkBehaviour
         {
             speed = SPEED_FLATRATE_WALK;
         }
+    }
 
-
-        if (moveForward < -SPEED_FLATRATE_JOG)
-        {
-            moveForward = -SPEED_FLATRATE_JOG;
-        }
-
+    void CalculateLookRotation()
+    {
         rotateX = Input.GetAxis("Mouse X") * sensitivity;
         rotateY -= Input.GetAxis("Mouse Y") * sensitivity;
 
         rotateY = Mathf.Clamp(rotateY, -60f, 60f);
+    }
 
-
+    void CheckJumping()
+    {
         if (characterController.isGrounded)
         {
             characterStates.CmdSetGrounded(playerid, true);
@@ -139,7 +156,23 @@ public class PlayerController : NetworkBehaviour
                 characterStates.CmdTriggerJump(playerid);
             }
         }
+    }
 
+    void CheckHaste()
+    {
+        if (Input.GetButtonDown("Fire3"))
+        {
+            haste = true;
+        }
+
+        if (Input.GetButtonUp("Fire3"))
+        {
+            haste = false;
+        }
+    }
+
+    void CheckShooting()
+    {
         if (Input.GetButtonDown("Fire1"))
         {
             gunAnimation.SetBool("Shooting", true);
@@ -150,19 +183,22 @@ public class PlayerController : NetworkBehaviour
             gunAnimation.SetBool("Shooting", false);
             shooting = false;
         }
+    }
 
+    void RechamberingGun()
+    {
         // Countdown until next bullet can be fired.
         if (shotCooldown > 0f)
         {
             shotCooldown = shotCooldown - Time.deltaTime;
         }
+    }
 
-
-
+    void ApplyMovement()
+    {
         Vector3 normalisedMovement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
         Vector3 movement = normalisedMovement * speed;
 
-        //Vector3 movement = new Vector3(moveSideway, verticalVelocity, moveForward);
         transform.Rotate(0, rotateX, 0);
         cam.transform.localRotation = Quaternion.Euler(rotateY, 0, 0);
 
@@ -171,29 +207,7 @@ public class PlayerController : NetworkBehaviour
         characterController.Move(worldMovement * Time.deltaTime);
 
         characterStates.CmdSetVelocityX(playerid, movement.x);
-        characterStates.CmdSetVelocityZ(playerid, movement.z);       
-    }
-
-    void FixedUpdate()
-    {
-
-        if (!characterController.isGrounded)
-        {
-            verticalVelocity += Physics.gravity.y * Time.deltaTime;
-        }
-
-        if (!hasAuthority)
-        {
-            return;
-        }
-
-
-        if (characterStates.HasAmmo && shooting && shotCooldown <= 0f)
-        {
-            shotCooldown = 4f * Time.deltaTime;
-            Shoot();
-        }
-
+        characterStates.CmdSetVelocityZ(playerid, movement.z);
     }
 
     [Client]
@@ -220,8 +234,10 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-
+    /* ********** *************** ********** */
     /* ********** SERVER COMMANDS ********** */
+    /* ********** *************** ********** */
+
     [Command]
     void CmdPlayerHit(string playerID, float damage)
     {
@@ -245,9 +261,9 @@ public class PlayerController : NetworkBehaviour
         RpcUpdateVelocity(velocity, position);
     }
 
-    /* ********** ********** */
-
-    /* ********** CLIENT COMMANDS ********** */
+    /* ********** *************** ********** */
+    /* ***** SERVER-TO-CLIENT COMMANDS ***** */
+    /* ********** *************** ********** */
 
     [ClientRpc]
     void RpcUpdateVelocity(Vector3 velocity, Vector3 position)
@@ -259,12 +275,10 @@ public class PlayerController : NetworkBehaviour
         }
 
         this.velocity = velocity;
-        bestGuessPosition = position + (velocity * localLatency);
-        //transform.position = position;
 
+        // Consider more lerping between positions to acoutn for latency?
+        //bestGuessPosition = position + (velocity * localLatency);
+        //transform.position = position;
         //transform.position = position  + (velocity * (localLatency + externalLatency));
     }
-
-    /* ********** ********** */
 }
-

@@ -1,6 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -38,11 +36,12 @@ public class PlayerManager : NetworkBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Update lifebar based on current health
+        // Update UI lifebar based on current health
         lifeBarRectTransform.sizeDelta = new Vector2(currentHP, lifeBarRectTransform.sizeDelta.y);
+
+        // Update UI ammo count text
         ammoCountText.text = characterStates.AmmoCount.ToString();
     }
 
@@ -62,17 +61,14 @@ public class PlayerManager : NetworkBehaviour
 
         lifeBarRectTransform = (RectTransform)panelCurrentHP.transform;
         ammoCountText.text = characterStates.AmmoCount.ToString();
-        //ammoCountText.text = characterStates.CmdGetAmmo(playerid).ToString();
     }
-
-
 
     private void Die()
     {
         isDead = true;
         deathScreen.SetActive(true);
 
-        //disable components
+        // Disable Components
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
             disableOnDeath[i].enabled = false;
@@ -88,7 +84,7 @@ public class PlayerManager : NetworkBehaviour
 
         Debug.Log(transform.name + " is dead");
 
-        //call respawn
+        // Call respawn as coroutine
         StartCoroutine(Respawn());
     }
 
@@ -101,7 +97,6 @@ public class PlayerManager : NetworkBehaviour
         Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = spawnPoint.position;
         transform.rotation = spawnPoint.rotation;
-
     }
 
     public void SetDefaults()
@@ -111,7 +106,6 @@ public class PlayerManager : NetworkBehaviour
 
         currentHP = maxHP;
         characterStates.CmdSetAmmo(playerid, defaultAmmo);
-
 
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
@@ -123,13 +117,13 @@ public class PlayerManager : NetworkBehaviour
         {
             collider.enabled = true;
         }
-
     }
 
-    /* ********** SERVER COMMANDS********** */
+    /* ********** *************** ********** */
+    /* ***** SERVER-TO-CLIENT COMMANDS ***** */
+    /* ********** *************** ********** */
 
-
-    /* ********** CLIENT COMMANDS ********** */
+    // Called from PlayerController's SERVER COMMAND - 'CmdPlayerHit'
     [ClientRpc]
     public void RpcApplyDamage(float amount)
     {
@@ -143,14 +137,10 @@ public class PlayerManager : NetworkBehaviour
         }
     }
 
-
+    // Not currently used, but may be required for removal of player.
     [ClientRpc]
     void RpcSelfTerminate()
     {
         Destroy(gameObject);
     }
-
-    /* ********** ********** */
-
-
 }

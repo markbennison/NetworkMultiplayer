@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(PlayerManager))]
@@ -11,9 +9,6 @@ public class PlayerSetup : NetworkBehaviour
 
     Camera sceneCamera;
 
-    bool cameraCheck = false;
-
-    // Start is called before the first frame update
     void Start()
     {
         if (!isLocalPlayer)
@@ -22,14 +17,14 @@ public class PlayerSetup : NetworkBehaviour
         }
         else
         {
-            // Local player
+            // Local (this) player
             sceneCamera = Camera.main;
             if (sceneCamera != null)
             {
                 sceneCamera.gameObject.SetActive(false);
             }
 
-            //remove 3PP
+            // Remove 3PP model for local player (xBot humanoid)
             this.transform.GetChild(1).gameObject.SetActive(false);
         }
 
@@ -40,7 +35,7 @@ public class PlayerSetup : NetworkBehaviour
     {
         base.OnStartClient();
 
-        string networkID = GetComponent<NetworkIdentity>().netId.ToString() ;
+        string networkID = GetComponent<NetworkIdentity>().netId.ToString();
         PlayerManager player = GetComponent<PlayerManager>();
 
         GameManager.RegisterPlayer(networkID, player);
@@ -48,13 +43,13 @@ public class PlayerSetup : NetworkBehaviour
 
     void DisableRemoteComponents()
     {
-        // Remote player
+        // Remote (other) player
         for (int i = 0; i < componentsToDisable.Length; i++)
         {
             componentsToDisable[i].enabled = false;
         }
 
-        //remove 1PP
+        // Remove 1PP model for remote players (Gun with Arms)
         transform.GetChild(0).gameObject.SetActive(false);
     }
 
@@ -67,5 +62,4 @@ public class PlayerSetup : NetworkBehaviour
 
         GameManager.UnregisterPlayer(transform.name);
     }
-
 }
