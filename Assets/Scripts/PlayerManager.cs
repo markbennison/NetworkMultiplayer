@@ -94,9 +94,17 @@ public class PlayerManager : NetworkBehaviour
 
         SetDefaults();
 
+        // Disable CharacterController or remote players may not transport correctly.
+        // (The CharacterController collides with obstacles and the player will appear stuck).
+        transform.gameObject.GetComponent<CharacterController>().enabled = false;
+
+        // Reset player's position to the next spawn point.
         Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = spawnPoint.position;
         transform.rotation = spawnPoint.rotation;
+
+        // Re-enable CharacterController and render visible.
+        transform.gameObject.GetComponent<CharacterController>().enabled = true;
     }
 
     public void SetDefaults()

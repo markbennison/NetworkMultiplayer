@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.Networking;
 
 [RequireComponent(typeof(BoxCollider))]
@@ -15,10 +16,6 @@ public class AmmoPickupController : NetworkBehaviour
     {
         if (collidedObject.tag == "Player")
         {
-            //CharacterStates characterStates = collidedObject.GetComponent<CharacterStates>();
-            //characterStates.CmdIncreaseAmmo(collidedObject.name, ammoAmount);
-            //Destroy(this.gameObject);
-
             CmdPickupAction(collidedObject.gameObject, this.gameObject);
         }
     }
@@ -30,13 +27,23 @@ public class AmmoPickupController : NetworkBehaviour
     [Command]
     public void CmdPickupAction(GameObject player, GameObject pickup)
     {
-        //PlayerManager player = GameManager.GetPlayer(playerID);
-        //player.gameObject.GetComponent<CharacterStates>().RpcTriggerJump();
-
         CharacterStates characterStates = player.GetComponent<CharacterStates>();
         characterStates.CmdIncreaseAmmo(player.name, ammoAmount);
-        
+
+        // Hide pickup underground
+        transform.position = new Vector3 (0, -10, 0);
+
+        // Comman Clients to also move/hide pickup and return after time
         RpcPickupAction(pickup);
+
+        // Coroutine waits set time to bring pickup back (server)
+        StartCoroutine(Respawn(pickup));
+    }
+
+    IEnumerator Respawn(GameObject pickup)
+    {
+        yield return new WaitForSeconds(5f);
+        transform.position = Vector3.zero;
     }
 
     /* ********** *************** ********** */
@@ -46,6 +53,10 @@ public class AmmoPickupController : NetworkBehaviour
     [ClientRpc]
     public void RpcPickupAction(GameObject pickup)
     {
-        Destroy(pickup.gameObject);
+        // Pull pickup from being hidden underground
+        transform.position = new Vector3(0, -10, 0);
+
+        // Coroutine waits set time to bring pickup back (clients)
+        StartCoroutine(Respawn(pickup));
     }
 }
