@@ -33,6 +33,25 @@ public class GameManager : MonoBehaviour
         return players[playerID];
     }
 
+    public static string AmmoCheckLog()
+    {
+        string log = "";
+        foreach (KeyValuePair<string, PlayerManager> entry in players)
+        {
+            CharacterStates states = entry.Value.gameObject.GetComponent<CharacterStates>();
+
+            if (states.AmmoCount < 0)
+            {
+                log += "Player: " + entry.Key + " . AmmoCount: " + states.AmmoCount + " \n";
+            }
+        }
+        if (log == "")
+        {
+            log = "No issues.";
+        }
+        return log;
+    }
+
     /* ********** *************** ********** */
     /* **********  For Debugging  ********** */
     /* ********** *************** ********** */

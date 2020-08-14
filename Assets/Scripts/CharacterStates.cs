@@ -37,7 +37,8 @@ public class CharacterStates : NetworkBehaviour
         }
     }
 
-    public bool HasAmmo { 
+    public bool HasAmmo
+    {
         get
         {
             if (ammoCount > 0)
@@ -48,7 +49,7 @@ public class CharacterStates : NetworkBehaviour
             {
                 return false;
             }
-        } 
+        }
     }
 
     void Start()
@@ -84,7 +85,6 @@ public class CharacterStates : NetworkBehaviour
         PlayerManager player = GameManager.GetPlayer(playerID);
         player.gameObject.GetComponent<CharacterStates>().RpcSetGrounded(value);
     }
-
 
     [Command]
     public void CmdSetAmmo(string playerID, int value)

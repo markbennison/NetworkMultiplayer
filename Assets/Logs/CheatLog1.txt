@@ -1,0 +1,415 @@
+Starting ... 13/08/2020 16:22:51 
+
+Starting ... 13/08/2020 16:23:12 
+
+Starting ... 13/08/2020 16:26:34 
+
+No issues.
+Starting ... 13/08/2020 16:28:42 
+
+No issues.
+Starting ... 13/08/2020 16:28:44 
+
+No issues.
+Player: Player 4 . AmmoCount: -1 
+
+Player: Player 4 . AmmoCount: -1 
+
+No issues.
+Player: Player 4 . AmmoCount: -1 
+
+Player: Player 4 . AmmoCount: -2 
+
+Player: Player 4 . AmmoCount: -2 
+
+No issues.
+Player: Player 4 . AmmoCount: -2 
+
+Player: Player 4 . AmmoCount: -3 
+
+Player: Player 4 . AmmoCount: -3 
+
+No issues.
+Player: Player 4 . AmmoCount: -3 
+
+Player: Player 4 . AmmoCount: -4 
+
+Player: Player 4 . AmmoCount: -4 
+
+No issues.
+Player: Player 4 . AmmoCount: -5 
+
+Player: Player 4 . AmmoCount: -6 
+
+Player: Player 4 . AmmoCount: -7 
+
+Player: Player 4 . AmmoCount: -6 
+
+Player: Player 4 . AmmoCount: -7 
+
+No issues.
+Player: Player 4 . AmmoCount: -8 
+
+Player: Player 4 . AmmoCount: -9 
+
+Player: Player 4 . AmmoCount: -9 
+
+No issues.
+Player: Player 4 . AmmoCount: -10 
+
+Player: Player 4 . AmmoCount: -10 
+
+No issues.
+Player: Player 4 . AmmoCount: -11 
+
+Player: Player 4 . AmmoCount: -11 
+
+No issues.
+Player: Player 4 . AmmoCount: -12 
+
+Player: Player 4 . AmmoCount: -12 
+
+Player: Player 4 . AmmoCount: -13 
+
+Player: Player 4 . AmmoCount: -13 
+
+Player: Player 4 . AmmoCount: -14 
+
+No issues.
+Player: Player 4 . AmmoCount: -14 
+
+Player: Player 4 . AmmoCount: -15 
+
+No issues.
+Player: Player 4 . AmmoCount: -15 
+
+Player: Player 4 . AmmoCount: -16 
+
+Player: Player 4 . AmmoCount: -16 
+
+No issues.
+Player: Player 4 . AmmoCount: -16 
+
+Player: Player 4 . AmmoCount: -17 
+
+No issues.
+Player: Player 4 . AmmoCount: -18 
+
+Player: Player 4 . AmmoCount: -17 
+
+Player: Player 4 . AmmoCount: -18 
+
+No issues.
+Player: Player 4 . AmmoCount: -19 
+
+Player: Player 4 . AmmoCount: -18 
+
+Player: Player 4 . AmmoCount: -19 
+
+No issues.
+Player: Player 4 . AmmoCount: -19 
+
+Player: Player 4 . AmmoCount: -20 
+
+Player: Player 4 . AmmoCount: -20 
+
+No issues.
+Player: Player 4 . AmmoCount: -20 
+
+Player: Player 4 . AmmoCount: -21 
+
+Player: Player 4 . AmmoCount: -21 
+
+No issues.
+Player: Player 4 . AmmoCount: -21 
+
+Player: Player 4 . AmmoCount: -22 
+
+Player: Player 4 . AmmoCount: -22 
+
+No issues.
+Player: Player 4 . AmmoCount: -22 
+
+Player: Player 4 . AmmoCount: -23 
+
+No issues.
+Player: Player 4 . AmmoCount: -24 
+
+Player: Player 4 . AmmoCount: -25 
+
+No issues.
+Player: Player 4 . AmmoCount: -26 
+
+Player: Player 4 . AmmoCount: -27 
+
+Player: Player 4 . AmmoCount: -27 
+
+No issues.
+Player: Player 4 . AmmoCount: -29 
+
+Player: Player 4 . AmmoCount: -29 
+
+No issues.
+Player: Player 4 . AmmoCount: -30 
+
+Player: Player 4 . AmmoCount: -30 
+
+No issues.
+Player: Player 4 . AmmoCount: -31 
+
+Player: Player 4 . AmmoCount: -30 
+
+No issues.
+Player: Player 4 . AmmoCount: -32 
+
+Player: Player 4 . AmmoCount: -32 
+
+No issues.
+Player: Player 4 . AmmoCount: -33 
+
+Player: Player 4 . AmmoCount: -33 
+
+No issues.
+Player: Player 4 . AmmoCount: -34 
+
+Player: Player 4 . AmmoCount: -33 
+
+Player: Player 4 . AmmoCount: -34 
+
+No issues.
+Player: Player 4 . AmmoCount: -35 
+
+Player: Player 4 . AmmoCount: -35 
+
+No issues.
+Player: Player 4 . AmmoCount: -36 
+
+Player: Player 4 . AmmoCount: -36 
+
+No issues.
+Player: Player 4 . AmmoCount: -36 
+
+Player: Player 4 . AmmoCount: -37 
+
+Player: Player 4 . AmmoCount: -37 
+
+No issues.
+Player: Player 4 . AmmoCount: -37 
+
+Player: Player 4 . AmmoCount: -38 
+
+Player: Player 4 . AmmoCount: -38 
+
+No issues.
+Player: Player 4 . AmmoCount: -38 
+
+Player: Player 4 . AmmoCount: -39 
+
+Player: Player 4 . AmmoCount: -39 
+
+No issues.
+Player: Player 4 . AmmoCount: -40 
+
+Player: Player 4 . AmmoCount: -40 
+
+No issues.
+Player: Player 4 . AmmoCount: -41 
+
+Player: Player 4 . AmmoCount: -41 
+
+No issues.
+Player: Player 4 . AmmoCount: -42 
+
+Player: Player 4 . AmmoCount: -42 
+
+Player: Player 4 . AmmoCount: -43 
+
+No issues.
+Player: Player 4 . AmmoCount: -44 
+
+Player: Player 4 . AmmoCount: -44 
+
+No issues.
+Player: Player 4 . AmmoCount: -45 
+
+Player: Player 4 . AmmoCount: -45 
+
+No issues.
+Player: Player 4 . AmmoCount: -46 
+
+Player: Player 4 . AmmoCount: -46 
+
+No issues.
+Player: Player 4 . AmmoCount: -47 
+
+Player: Player 4 . AmmoCount: -47 
+
+No issues.
+Player: Player 4 . AmmoCount: -48 
+
+Player: Player 4 . AmmoCount: -49 
+
+Player: Player 4 . AmmoCount: -50 
+
+Player: Player 4 . AmmoCount: -51 
+
+Player: Player 4 . AmmoCount: -51 
+
+No issues.
+Player: Player 4 . AmmoCount: -52 
+
+Player: Player 4 . AmmoCount: -53 
+
+Player: Player 4 . AmmoCount: -53 
+
+Player: Player 4 . AmmoCount: -54 
+
+Player: Player 4 . AmmoCount: -54 
+
+No issues.
+13/08/2020 16:35:12: Starting ... 
+
+No issues.
+13/08/2020 16:35:25: Starting ... 
+
+No issues.
+Player: Player 4 . AmmoCount: -1 
+
+Player: Player 4 . AmmoCount: -1 
+
+No issues.
+Player: Player 4 . AmmoCount: -2 
+
+Player: Player 4 . AmmoCount: -2 
+
+No issues.
+Player: Player 4 . AmmoCount: -3 
+
+Player: Player 4 . AmmoCount: -3 
+
+Player: Player 4 . AmmoCount: -4 
+
+Player: Player 4 . AmmoCount: -4 
+
+No issues.
+Player: Player 4 . AmmoCount: -4 
+
+Player: Player 4 . AmmoCount: -5 
+
+Player: Player 4 . AmmoCount: -5 
+
+No issues.
+Player: Player 4 . AmmoCount: -6 
+
+Player: Player 4 . AmmoCount: -7 
+
+Player: Player 4 . AmmoCount: -7 
+
+No issues.
+Player: Player 4 . AmmoCount: -8 
+
+Player: Player 4 . AmmoCount: -8 
+
+Player: Player 4 . AmmoCount: -9 
+
+No issues.
+Player: Player 4 . AmmoCount: -10 
+
+Player: Player 4 . AmmoCount: -10 
+
+No issues.
+Player: Player 4 . AmmoCount: -11 
+
+Player: Player 4 . AmmoCount: -11 
+
+No issues.
+Player: Player 4 . AmmoCount: -12 
+
+Player: Player 4 . AmmoCount: -12 
+
+No issues.
+Player: Player 4 . AmmoCount: -13 
+
+No issues.
+Player: Player 4 . AmmoCount: -14 
+
+Player: Player 4 . AmmoCount: -14 
+
+No issues.
+Player: Player 4 . AmmoCount: -15 
+
+Player: Player 4 . AmmoCount: -15 
+
+No issues.
+Player: Player 4 . AmmoCount: -16 
+
+Player: Player 4 . AmmoCount: -16 
+
+No issues.
+Player: Player 4 . AmmoCount: -17 
+
+Player: Player 4 . AmmoCount: -17 
+
+No issues.
+Player: Player 4 . AmmoCount: -18 
+
+Player: Player 4 . AmmoCount: -19 
+
+Player: Player 4 . AmmoCount: -20 
+
+Player: Player 4 . AmmoCount: -20 
+
+No issues.
+Player: Player 4 . AmmoCount: -21 
+
+Player: Player 4 . AmmoCount: -22 
+
+Player: Player 4 . AmmoCount: -22 
+
+Player: Player 4 . AmmoCount: -23 
+
+No issues.
+Player: Player 4 . AmmoCount: -24 
+
+Player: Player 4 . AmmoCount: -24 
+
+No issues.
+Player: Player 4 . AmmoCount: -25 
+
+Player: Player 4 . AmmoCount: -25 
+
+No issues.
+Player: Player 4 . AmmoCount: -26 
+
+Player: Player 4 . AmmoCount: -26 
+
+No issues.
+Player: Player 4 . AmmoCount: -26 
+
+No issues.
+Player: Player 4 . AmmoCount: -27 
+
+Player: Player 4 . AmmoCount: -27 
+
+No issues.
+Player: Player 4 . AmmoCount: -28 
+
+No issues.
+Player: Player 4 . AmmoCount: -29 
+
+Player: Player 4 . AmmoCount: -29 
+
+Player: Player 4 . AmmoCount: -30 
+
+No issues.
+Player: Player 4 . AmmoCount: -31 
+
+Player: Player 4 . AmmoCount: -31 
+
+No issues.
+Player: Player 4 . AmmoCount: -32 
+
+Player: Player 4 . AmmoCount: -32 
+
+No issues.
+No issues.
