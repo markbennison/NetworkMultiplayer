@@ -10,10 +10,14 @@ public class PlayerManager : NetworkBehaviour
     public Text ammoCountText;
     public GameObject deathScreen;
 
-    [SyncVar]
-    public float currentHP;
     private float maxHP = 100;
     private int defaultAmmo = 200;
+
+    //[SyncVar]
+    //public float currentHP;
+
+    [SyncVar]
+    SecureFloat currentHP;
 
     [SyncVar]
     private bool isDead = false;
@@ -39,7 +43,9 @@ public class PlayerManager : NetworkBehaviour
     void Update()
     {
         // Update UI lifebar based on current health
-        lifeBarRectTransform.sizeDelta = new Vector2(currentHP, lifeBarRectTransform.sizeDelta.y);
+        // ANTI-HACK SecureFloat implementation for health
+        //lifeBarRectTransform.sizeDelta = new Vector2(currentHP, lifeBarRectTransform.sizeDelta.y);
+        lifeBarRectTransform.sizeDelta = new Vector2(currentHP.Get(), lifeBarRectTransform.sizeDelta.y);
 
         // Update UI ammo count text
         ammoCountText.text = characterStates.AmmoCount.ToString();
@@ -57,6 +63,7 @@ public class PlayerManager : NetworkBehaviour
             wasEnabled[i] = disableOnDeath[i].enabled;
         }
 
+        currentHP = new SecureFloat(maxHP);
         SetDefaults();
 
         lifeBarRectTransform = (RectTransform)panelCurrentHP.transform;
@@ -112,7 +119,10 @@ public class PlayerManager : NetworkBehaviour
         isDead = false;
         deathScreen.SetActive(false);
 
-        currentHP = maxHP;
+        // ANTI-HACK SecureFloat implementation for health
+        //currentHP = maxHP;
+        currentHP.Set(maxHP);
+
         characterStates.CmdSetAmmo(playerid, defaultAmmo);
 
         for (int i = 0; i < disableOnDeath.Length; i++)
@@ -135,11 +145,13 @@ public class PlayerManager : NetworkBehaviour
     [ClientRpc]
     public void RpcApplyDamage(float amount)
     {
-        currentHP -= amount;
+        // ANTI-HACK SecureFloat implementation for health
+        //currentHP -= amount;
+        currentHP.SubtractFloat(amount);
 
-        Debug.Log(transform.name + " health: " + currentHP);
+        Debug.Log(transform.name + " health: " + currentHP.ToString());
 
-        if (currentHP <= 0.0)
+        if (currentHP.Get() <= 0.0f)
         {
             Die();
         }
