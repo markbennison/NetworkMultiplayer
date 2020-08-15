@@ -20,8 +20,11 @@ public class CharacterStates : NetworkBehaviour
     [SyncVar]
     public float velocityZ = 0f;
 
+    // ANTI-HACK SecureInt implementation for ammo
+    //[SyncVar]
+    //int ammoCount = 0;
     [SyncVar]
-    int ammoCount = 0;
+    SecureInt ammoCount = new SecureInt();
 
     bool isShooting = false;
     bool isReloading = false;
@@ -33,7 +36,7 @@ public class CharacterStates : NetworkBehaviour
     public int AmmoCount {
         get
         {
-            return this.ammoCount;
+            return this.ammoCount.Get();
         }
     }
 
@@ -41,7 +44,7 @@ public class CharacterStates : NetworkBehaviour
     {
         get
         {
-            if (ammoCount > 0)
+            if (AmmoCount > 0)
             {
                 return true;
             }
@@ -147,19 +150,19 @@ public class CharacterStates : NetworkBehaviour
     [ClientRpc]
     public void RpcSetAmmo(int value)
     {
-        ammoCount = value;
+        ammoCount.Set(value);
     }
 
     [ClientRpc]
     public void RpcIncreaseAmmo(int value)
     {
-        ammoCount += value;
+        ammoCount.AddInt(value);
     }
 
     [ClientRpc]
     public void RpcDecreaseAmmo(int value)
     {
-        ammoCount -= value;
+        ammoCount.SubtractInt(value);
     }
 
     [ClientRpc]

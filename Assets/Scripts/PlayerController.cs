@@ -96,6 +96,8 @@ public class PlayerController : NetworkBehaviour
 
     void FixedUpdate()
     {
+        gunAnimation.SetBool("HasAmmo", characterStates.HasAmmo);
+
         if (!characterController.isGrounded)
         {
             verticalVelocity += Physics.gravity.y * Time.deltaTime;

@@ -16,6 +16,7 @@ public class PlayerManager : NetworkBehaviour
     //[SyncVar]
     //public float currentHP;
 
+    // ANTI-HACK SecureFloat implementation for health
     [SyncVar]
     SecureFloat currentHP;
 
